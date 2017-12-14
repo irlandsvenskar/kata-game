@@ -1,7 +1,11 @@
 import React from 'react';
-import {shallow} from 'enzyme';
-import {expect} from 'chai';
+import { shallow } from 'enzyme';
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import { expect } from 'chai';
 import HomePage from './HomePage';
+
+Enzyme.configure({adapter: new Adapter()});
 
 describe('<HomePage />', () => {
 
