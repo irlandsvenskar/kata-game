@@ -17,4 +17,28 @@ describe('<HomePage />', () => {
         expect(actual).to.equal(expected);
     });
 
+    it('should have a header for setup instructions', () => {
+        const wrapper = shallow(<HomePage />);
+        const actual = wrapper.find('h2').text();
+        const expected = 'Instructions';
+
+        expect(actual).to.equal(expected);
+    });
+
+    it('should have setup instructions', () => {
+        const wrapper = shallow(<HomePage />);
+        const actual = wrapper.find('p').text();
+        const expected = 'The setup instructions go here...';
+
+        expect(actual).to.equal(expected);
+    });
+
+    it('should have a \'Start!\' button', () => {
+        const wrapper = shallow(<HomePage />);
+        const actual = wrapper.find('button').text();
+        const expected = 'Start!';
+
+        expect(actual).to.equal(expected);
+    });
+
 });

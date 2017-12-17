@@ -5,6 +5,9 @@ export default class HomePage extends React.Component {
         return (
             <div>
                 <h1>So Simple!</h1>
+                <h2>Instructions</h2>
+                <p>The setup instructions go here...</p>
+                <button>Start!</button>
             </div>
         )
     }
