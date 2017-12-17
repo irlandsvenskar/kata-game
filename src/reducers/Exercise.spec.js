@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import { completeTask, startExercise } from '../constants/actions.js';
-import { reduce } from './Exercise.js';
-import Exercise from '../model/Exercise.js';
+import { completeTask, startExercise } from '../constants/actions';
+import { reduce } from './Exercise';
+import Exercise from '../model/Exercise';
 
 describe('Reduce exercise', () => {
 

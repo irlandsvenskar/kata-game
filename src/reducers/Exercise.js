@@ -1,5 +1,5 @@
-import { START_EXERCISE, COMPLETE_TASK } from '../constants/actions.js';
-import Exercise from '../model/Exercise.js';
+import { START_EXERCISE, COMPLETE_TASK } from '../constants/actions';
+import Exercise from '../model/Exercise';
 
 const initialState = {
     exercise: new Exercise(null, [])

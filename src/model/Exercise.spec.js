@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Exercise from './Exercise.js';
+import Exercise from './Exercise';
 
 describe('Exercise time', () => {
 
