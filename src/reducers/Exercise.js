@@ -23,8 +23,9 @@ const reduce = (state=initialState, action) => {
                 ...tasks.slice(action.index + 1)
             ];
             return buildState(state, state.exercise.startTime, newTasks);
+        default:
+            return state;
     }
-    return state;
 };
 
 export { reduce };
