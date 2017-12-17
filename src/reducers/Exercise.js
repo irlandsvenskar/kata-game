@@ -1,3 +1,4 @@
+import { START_EXERCISE, COMPLETE_TASK } from '../constants/actions.js';
 import Exercise from '../model/Exercise.js';
 
 const initialState = {
@@ -12,9 +13,9 @@ const buildState = (oldState, exerciseStartTime, tasks) => {
 
 const reduce = (state=initialState, action) => {
     switch (action.type) {
-        case 'START_EXERCISE':
+        case START_EXERCISE:
             return buildState(state, action.time, state.exercise.tasks);
-        case 'COMPLETE_TASK':
+        case COMPLETE_TASK:
             const tasks = state.exercise.tasks;
             const newTasks = [
                 ...tasks.slice(0, action.index),

@@ -1,0 +1,2 @@
+export const COMPLETE_TASK = 'COMPLETE_TASK';
+export const START_EXERCISE = 'START_EXERCISE';
