@@ -14,6 +14,7 @@ export default class ExercisePage extends React.Component {
             <div>
                 <h1>{taskTitle}</h1>
                 <p>{errorMessage}</p>
+                <button>Done!</button>
             </div>
         )
     }

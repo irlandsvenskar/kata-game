@@ -18,10 +18,17 @@ describe('<ExercisePage/>', () => {
     });
 
     it('should show the first task', () => {
-        const exercise = new Exercise(0, [{'name': 'Task 1'}]);
+        const exercise = new Exercise(0, [{'name': '::irrelevant task name::'}]);
         const wrapper = shallow(<ExercisePage exercise={exercise}/>);
         const heading = wrapper.find('h1').text();
-        expect(heading).to.equal('Task 1');
+        expect(heading).to.equal('::irrelevant task name::');
+    });
+
+    it('should show a done button', () => {
+        const exercise = new Exercise(0, [{'name': '::irrelevant task name::'}]);
+        const wrapper = shallow(<ExercisePage exercise={exercise}/>);
+        const buttonName = wrapper.find('button').text();
+        expect(buttonName).to.equal('Done!');
     });
 
 });
