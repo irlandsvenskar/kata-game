@@ -15,4 +15,10 @@ describe('<ExercisePage/>', () => {
         expect(error).to.equal('This exercise has no tasks!');
     });
 
+    it('should show the first task', () => {
+        const wrapper = shallow(<ExercisePage/>);
+        const heading = wrapper.find('h1').text();
+        expect(heading).to.equal('Task 1');
+    });
+
 });
