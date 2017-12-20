@@ -1,16 +1,16 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import Enzyme from 'enzyme';
+import LandingPage from './LandingPage';
+import React from 'react';
 import { expect } from 'chai';
-import HomePage from './HomePage';
+import { shallow } from 'enzyme';
 
 Enzyme.configure({adapter: new Adapter()});
 
-describe('<HomePage />', () => {
+describe('<LandingPage/>', () => {
 
     it('should say \'So Simple!\'', () => {
-        const wrapper = shallow(<HomePage />);
+        const wrapper = shallow(<LandingPage/>);
         const actual = wrapper.find('h1').text();
         const expected = 'So Simple!';
 
@@ -18,7 +18,7 @@ describe('<HomePage />', () => {
     });
 
     it('should have a header for setup instructions', () => {
-        const wrapper = shallow(<HomePage />);
+        const wrapper = shallow(<LandingPage/>);
         const actual = wrapper.find('h2').text();
         const expected = 'Instructions';
 
@@ -26,7 +26,7 @@ describe('<HomePage />', () => {
     });
 
     it('should have setup instructions', () => {
-        const wrapper = shallow(<HomePage />);
+        const wrapper = shallow(<LandingPage/>);
         const actual = wrapper.find('p').text();
         const expected = 'The setup instructions go here...';
 
@@ -34,7 +34,7 @@ describe('<HomePage />', () => {
     });
 
     it('should have a \'Start!\' button', () => {
-        const wrapper = shallow(<HomePage />);
+        const wrapper = shallow(<LandingPage/>);
         const actual = wrapper.find('button').text();
         const expected = 'Start!';
 

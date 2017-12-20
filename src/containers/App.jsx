@@ -1,11 +1,11 @@
 import React from 'react';
-import HomePage from './HomePage';
+import LandingPage from '../components/LandingPage';
 
 export default class App extends React.Component {
     render() {
         return (
             <div>
-                <HomePage/>
+                <LandingPage/>
             </div>
         )
     }
