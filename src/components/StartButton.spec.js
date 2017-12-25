@@ -27,8 +27,7 @@ describe('start button', () => {
         const action = actionDispatcher.getAction();
         const expectedAction = startExercise(123);
 
-        expect(action.time).to.equal(expectedAction.time);
-        expect(action.type).to.equal(expectedAction.type);
+        expect(action).to.deep.equal(expectedAction);
     });
 
 });
