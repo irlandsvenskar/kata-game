@@ -7,7 +7,7 @@ import { configure, shallow } from 'enzyme';
 
 configure({adapter: new Adapter()});
 
-describe('Show summary', () => {
+describe('Show total time', () => {
 
     it('should show total time', () => {
         const wrapper = shallow(<ExercisePage
@@ -31,6 +31,35 @@ describe('Show summary', () => {
         });
         const totalTime = wrapper.find('span.totalTime').text();
         expect(totalTime).to.equal('7');
+    });
+
+});
+
+describe('Show task times', () => {
+
+    it('should show task time for single task', () => {
+        const wrapper = shallow(<ExercisePage
+            exercise={new Exercise(['::task 1::'])}/>);
+        wrapper.setState({
+            currentTask: 1,
+            exerciseStartTime: 10,
+            taskFinishTimes: [15]
+        });
+        const taskTime = wrapper.find('span.taskTime').at(0).text();
+        expect(taskTime).to.equal('5');
+    });
+
+    it('should show task times for multiple tasks', () => {
+        const wrapper = shallow(<ExercisePage
+            exercise={new Exercise(['::task 1::', '::task 2::'])}/>);
+        wrapper.setState({
+            currentTask: 2,
+            exerciseStartTime: 7,
+            taskFinishTimes: [15, 27]
+        });
+        const taskTimes = wrapper.find('span.taskTime');
+        expect(taskTimes.at(0).text()).to.equal('8');
+        expect(taskTimes.at(1).text()).to.equal('12');
     });
 
 });
