@@ -37,3 +37,18 @@ describe('Update current task', () => {
     });
 
 });
+
+describe('Exercise page states', () => {
+
+    it('should not show done button before start', () => {
+        const wrapper = shallow(<ExercisePage/>);
+        expect(wrapper.find('button.done')).to.have.length(0);
+    });
+
+    it('should not show start button after start', () => {
+        const wrapper = shallow(<ExercisePage/>);
+        wrapper.setState({'currentTask': 0});
+        expect(wrapper.find('button.start')).to.have.length(0);
+    });
+
+});

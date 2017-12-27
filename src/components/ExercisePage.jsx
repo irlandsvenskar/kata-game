@@ -14,11 +14,13 @@ export default class ExercisePage extends React.Component {
         }));
     }
     render() {
-        return (
-            <div>
-                <button className='start' onClick={this.startExercise}>Start!</button>
+        if (this.state.currentTask === null) {
+            return (
+                <button className='start' onClick={this.startExercise}>Start!</button>);
+        } else {
+            return (
                 <button className='done' onClick={this.taskDone}>Done!</button>
-            </div>
-        );
+            );
+        }
     }
 }
