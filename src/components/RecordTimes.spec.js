@@ -15,11 +15,30 @@ describe('Record start time', () => {
 
     it('should record the start time', () => {
         const IRRELEVANT_NUMERIC_VALUE = 2;
-        const wrapper = shallow(<ExercisePage/>);
+        const timeProvider = () => IRRELEVANT_NUMERIC_VALUE;
+        const wrapper = shallow(<ExercisePage timeProvider={timeProvider}/>);
         const startButton = wrapper.find('button.start');
         startButton.simulate('click');
         const startTime = wrapper.state('exerciseStartTime');
         expect(startTime).to.equal(IRRELEVANT_NUMERIC_VALUE);
+    });
+
+    it('should record another start time', () => {
+        const IRRELEVANT_NUMERIC_VALUE = 5;
+        const timeProvider = () => IRRELEVANT_NUMERIC_VALUE;
+        const wrapper = shallow(<ExercisePage timeProvider={timeProvider}/>);
+        const startButton = wrapper.find('button.start');
+        startButton.simulate('click');
+        const startTime = wrapper.state('exerciseStartTime');
+        expect(startTime).to.equal(IRRELEVANT_NUMERIC_VALUE);
+    });
+
+    it('should record a start time when no timeProvider is given', () => {
+        const wrapper = shallow(<ExercisePage/>);
+        const startButton = wrapper.find('button.start');
+        startButton.simulate('click');
+        const startTime = wrapper.state('exerciseStartTime');
+        expect(startTime).to.be.a('number');
     });
 
 });
