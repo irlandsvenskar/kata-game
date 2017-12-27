@@ -1,7 +1,6 @@
 export default class Exercise {
 
-    constructor(startTime, tasks) {
-        this.startTime = startTime;
+    constructor(tasks) {
         this.tasks = tasks;
     }
 

@@ -22,7 +22,7 @@ describe('Update current task', () => {
     });
 
     it('should go from 0 to 1 on done button click', () => {
-        const exercise = new Exercise(null, ['::irrelevant task::']);
+        const exercise = new Exercise(['::irrelevant task::']);
         const wrapper = shallow(<ExercisePage exercise={exercise}/>);
         wrapper.setState({'currentTask': 0});
         const doneButton = wrapper.find('button.done');
@@ -31,7 +31,7 @@ describe('Update current task', () => {
     });
 
     it('should go from 1 to 2 on done button click', () => {
-        const exercise = new Exercise(null, ['::irrelevant task 1::', '::irrelevant task 2::']);
+        const exercise = new Exercise(['::irrelevant task 1::', '::irrelevant task 2::']);
         const wrapper = shallow(<ExercisePage exercise={exercise}/>);
         wrapper.setState({'currentTask': 1});
         const doneButton = wrapper.find('button.done');
@@ -49,7 +49,7 @@ describe('Exercise page states', () => {
     });
 
     it('should not show done button after last task', () => {
-        const wrapper = shallow(<ExercisePage exercise={new Exercise(1, ['::task 0::', '::task 1::'])}/>);
+        const wrapper = shallow(<ExercisePage exercise={new Exercise(['::task 0::', '::task 1::'])}/>);
         wrapper.setState({currentTask: 2});
         expect(wrapper.find('button.done')).to.have.length(0);
     });

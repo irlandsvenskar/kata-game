@@ -4,7 +4,7 @@ import React from 'react';
 export default class ExercisePage extends React.Component {
     constructor(props) {
         super(props);
-        this.exercise = props.exercise || new Exercise(null, []);
+        this.exercise = props.exercise || new Exercise([]);
         this.timeProvider = props.timeProvider || Date.now
         this.heading = props.heading;
         this.state = {

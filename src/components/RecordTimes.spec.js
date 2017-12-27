@@ -56,7 +56,7 @@ describe('Record task time', () => {
         const timeProvider = () => IRRELEVANT_NUMERIC_VALUE;
         const wrapper = shallow(
             <ExercisePage
-                exercise={new Exercise(null, ['::some task::'])}
+                exercise={new Exercise(['::some task::'])}
                 timeProvider={timeProvider}/>
         );
         wrapper.setState({currentTask: 0});
@@ -67,7 +67,7 @@ describe('Record task time', () => {
 
     it('should record the task finish time when no timeProvider is given', () => {
         const wrapper = shallow(
-            <ExercisePage exercise={new Exercise(null, ['::some task::'])}/>
+            <ExercisePage exercise={new Exercise(['::some task::'])}/>
         );
         wrapper.setState({currentTask: 0});
         wrapper.find('button.done').simulate('click');
@@ -82,7 +82,7 @@ describe('Record task time', () => {
         const timeProvider = () => IRRELEVANT_NUMERIC_VALUE_2;
         const wrapper = shallow(
             <ExercisePage
-                exercise={new Exercise(null, ['::some task::', '::some other task::'])}
+                exercise={new Exercise(['::some task::', '::some other task::'])}
                 timeProvider={timeProvider}/>
         );
         wrapper.setState({
