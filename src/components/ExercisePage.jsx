@@ -5,7 +5,7 @@ export default class ExercisePage extends React.Component {
         super(props);
         this.state = {currentTask: null};
     }
-    start = () => {
+    startExercise = () => {
         this.setState({currentTask: 0})
     }
     taskDone = () => {
@@ -16,7 +16,7 @@ export default class ExercisePage extends React.Component {
     render() {
         return (
             <div>
-                <button className='start' onClick={this.start}>Start!</button>
+                <button className='start' onClick={this.startExercise}>Start!</button>
                 <button className='done' onClick={this.taskDone}>Done!</button>
             </div>
         );
