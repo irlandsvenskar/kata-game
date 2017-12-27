@@ -6,18 +6,27 @@ export default class Exercise {
     }
 
     getTotalTime() {
-        if (this.tasks.length === 0) {
-            return 0;
-        }
-        const endTime = this.tasks[this.tasks.length - 1].endTime;
-        return endTime - this.startTime;
+        return calculateTotalTime(this.startTime, this.tasks.map(t => t.endTime));
     }
 
     getTaskTime(taskIndex) {
-        const endTime = this.tasks[taskIndex].endTime
-        const startTime = taskIndex === 0 ?
-            this.startTime : this.tasks[taskIndex - 1].endTime;
-        return endTime - startTime;
+        return calculateTaskTime(this.startTime, this.tasks.map(t => t.endTime), taskIndex);
     }
 
 }
+
+const calculateTaskTime = (exerciseStartTime, taskFinishTimes, taskIndex) => {
+    const endTime = taskFinishTimes[taskIndex];
+    const startTime = taskIndex === 0 ?
+        exerciseStartTime : taskFinishTimes[taskIndex - 1];
+    return endTime - startTime;
+};
+
+const calculateTotalTime = (exerciseStartTime, taskFinishTimes) => {
+    if (taskFinishTimes.length === 0) {
+        return 0;
+    }
+    return taskFinishTimes[taskFinishTimes.length - 1] - exerciseStartTime;
+};
+
+export { calculateTaskTime, calculateTotalTime };
