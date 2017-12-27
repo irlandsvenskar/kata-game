@@ -27,4 +27,12 @@ describe('Update current task', () => {
         expect(wrapper.state('currentTask')).toEqual(1);
     });
 
+    it('should go from 1 to 2 on done button click', () => {
+        const wrapper = shallow(<ExercisePage/>);
+        wrapper.setState({'currentTask': 1});
+        const doneButton = wrapper.find('button.done');
+        doneButton.simulate('click');
+        expect(wrapper.state('currentTask')).toEqual(2);
+    });
+
 });
