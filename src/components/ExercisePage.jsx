@@ -3,6 +3,7 @@ import React from 'react';
 export default class ExercisePage extends React.Component {
     constructor(props) {
         super(props);
+        this.heading = props.heading;
         this.state = {currentTask: null};
     }
     startExercise = () => {
@@ -16,7 +17,11 @@ export default class ExercisePage extends React.Component {
     render() {
         if (this.state.currentTask === null) {
             return (
-                <button className='start' onClick={this.startExercise}>Start!</button>);
+                <div>
+                    <h2>{this.heading}</h2>
+                    <button className='start' onClick={this.startExercise}>Start!</button>
+                </div>
+            );
         } else {
             return (
                 <button className='done' onClick={this.taskDone}>Done!</button>
