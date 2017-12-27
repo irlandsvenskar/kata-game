@@ -1,5 +1,5 @@
-import { expect } from 'chai';
 import { completeTask, startExercise } from '../constants/actions';
+import { expect } from 'chai';
 import { reduce } from './Exercise';
 import Exercise from '../model/Exercise';
 

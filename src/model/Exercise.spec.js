@@ -1,5 +1,5 @@
-import { expect } from 'chai';
 import { calculateTaskTime, calculateTotalTime } from './Exercise';
+import { expect } from 'chai';
 
 describe('Exercise time', () => {
 

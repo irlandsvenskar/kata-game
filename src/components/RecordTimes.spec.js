@@ -2,8 +2,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import Exercise from '../model/Exercise';
 import ExercisePage from './ExercisePage';
 import React from 'react';
-import { expect } from 'chai';
 import { configure, shallow } from 'enzyme';
+import { expect } from 'chai';
 
 configure({adapter: new Adapter()});
 
