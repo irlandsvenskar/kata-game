@@ -18,7 +18,8 @@ export default class ExercisePage extends React.Component {
     }
     taskDone = () => {
         this.setState((prevState, props) => ({
-            currentTask: prevState.currentTask + 1
+            currentTask: prevState.currentTask + 1,
+            taskFinishTimes: prevState.taskFinishTimes.concat([this.timeProvider()])
         }));
     }
     render() {
