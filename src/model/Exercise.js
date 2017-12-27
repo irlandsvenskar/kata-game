@@ -5,14 +5,6 @@ export default class Exercise {
         this.tasks = tasks;
     }
 
-    getTotalTime() {
-        return calculateTotalTime(this.startTime, this.tasks.map(t => t.endTime));
-    }
-
-    getTaskTime(taskIndex) {
-        return calculateTaskTime(this.startTime, this.tasks.map(t => t.endTime), taskIndex);
-    }
-
 }
 
 const calculateTaskTime = (exerciseStartTime, taskFinishTimes, taskIndex) => {
