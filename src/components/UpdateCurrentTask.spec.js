@@ -1,4 +1,5 @@
 import Adapter from 'enzyme-adapter-react-16';
+import Exercise from '../model/Exercise';
 import ExercisePage from './ExercisePage';
 import React from 'react';
 import { configure, shallow } from 'enzyme';
@@ -21,7 +22,8 @@ describe('Update current task', () => {
     });
 
     it('should go from 0 to 1 on done button click', () => {
-        const wrapper = shallow(<ExercisePage/>);
+        const exercise = new Exercise(null, ['::irrelevant task::']);
+        const wrapper = shallow(<ExercisePage exercise={exercise}/>);
         wrapper.setState({'currentTask': 0});
         const doneButton = wrapper.find('button.done');
         doneButton.simulate('click');
@@ -29,7 +31,8 @@ describe('Update current task', () => {
     });
 
     it('should go from 1 to 2 on done button click', () => {
-        const wrapper = shallow(<ExercisePage/>);
+        const exercise = new Exercise(null, ['::irrelevant task 1::', '::irrelevant task 2::']);
+        const wrapper = shallow(<ExercisePage exercise={exercise}/>);
         wrapper.setState({'currentTask': 1});
         const doneButton = wrapper.find('button.done');
         doneButton.simulate('click');
@@ -42,6 +45,12 @@ describe('Exercise page states', () => {
 
     it('should not show done button before start', () => {
         const wrapper = shallow(<ExercisePage/>);
+        expect(wrapper.find('button.done')).to.have.length(0);
+    });
+
+    it('should not show done button after last task', () => {
+        const wrapper = shallow(<ExercisePage exercise={new Exercise(1, ['::task 0::', '::task 1::'])}/>);
+        wrapper.setState({currentTask: 2});
         expect(wrapper.find('button.done')).to.have.length(0);
     });
 

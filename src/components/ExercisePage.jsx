@@ -1,8 +1,10 @@
+import Exercise from '../model/Exercise';
 import React from 'react';
 
 export default class ExercisePage extends React.Component {
     constructor(props) {
         super(props);
+        this.exercise = props.exercise || new Exercise(null, []);
         this.heading = props.heading;
         this.state = {currentTask: null};
     }
@@ -22,10 +24,12 @@ export default class ExercisePage extends React.Component {
                     <button className='start' onClick={this.startExercise}>Start!</button>
                 </div>
             );
-        } else {
+        } else if (this.state.currentTask < this.exercise.tasks.length) {
             return (
                 <button className='done' onClick={this.taskDone}>Done!</button>
             );
+        } else {
+            return <h2>Done!</h2>
         }
     }
 }
