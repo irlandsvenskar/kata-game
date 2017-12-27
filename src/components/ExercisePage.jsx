@@ -6,11 +6,20 @@ export default class ExercisePage extends React.Component {
         this.state = {currentTask: null};
     }
     start = () => {
-        this.setState({currentTask: 0});
+        this.setState((prevState, props) => {
+            if (prevState.currentTask === null) {
+                return {currentTask: 0};
+            } else {
+                return {currentTask: prevState.currentTask + 1}
+            }
+        });
     }
     render() {
         return (
-            <button onClick={this.start}>Start!</button>
+            <div>
+                <button className='start' onClick={this.start}>Start!</button>
+                <button className='done' onClick={this.start}>Done!</button>
+            </div>
         );
     }
 }
