@@ -2,6 +2,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import ExercisePage from './ExercisePage';
 import React from 'react';
 import { configure, shallow } from 'enzyme';
+import { expect } from 'chai';
 
 configure({adapter: new Adapter()});
 
@@ -9,14 +10,14 @@ describe('Update current task', () => {
 
     it('should be constructed with null', () => {
         const wrapper = shallow(<ExercisePage/>);
-        expect(wrapper.state('currentTask')).toBeNull();
+        expect(wrapper.state('currentTask')).to.equal(null);
     });
 
     it('should go from null to 0 on start button click', () => {
         const wrapper = shallow(<ExercisePage/>);
         const startButton = wrapper.find('button.start');
         startButton.simulate('click');
-        expect(wrapper.state('currentTask')).toEqual(0);
+        expect(wrapper.state('currentTask')).to.equal(0);
     });
 
     it('should go from 0 to 1 on done button click', () => {
@@ -24,7 +25,7 @@ describe('Update current task', () => {
         wrapper.setState({'currentTask': 0});
         const doneButton = wrapper.find('button.done');
         doneButton.simulate('click');
-        expect(wrapper.state('currentTask')).toEqual(1);
+        expect(wrapper.state('currentTask')).to.equal(1);
     });
 
     it('should go from 1 to 2 on done button click', () => {
@@ -32,7 +33,7 @@ describe('Update current task', () => {
         wrapper.setState({'currentTask': 1});
         const doneButton = wrapper.find('button.done');
         doneButton.simulate('click');
-        expect(wrapper.state('currentTask')).toEqual(2);
+        expect(wrapper.state('currentTask')).to.equal(2);
     });
 
 });
