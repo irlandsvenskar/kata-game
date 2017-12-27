@@ -2,27 +2,21 @@ import { START_EXERCISE, COMPLETE_TASK } from '../constants/actions';
 import Exercise from '../model/Exercise';
 
 const initialState = {
-    exercise: new Exercise(null, [])
+    exerciseStartTime: null,
+    taskFinishTimes: []
 };
 
-const buildState = (oldState, exerciseStartTime, tasks) => {
-    return Object.assign({}, oldState, {
-        exercise: new Exercise(exerciseStartTime, tasks)
-    });
+const buildState = (oldState, exerciseStartTime, taskFinishTimes) => {
+    return Object.assign({}, oldState, {exerciseStartTime, taskFinishTimes});
 };
 
 const reduce = (state=initialState, action) => {
     switch (action.type) {
         case START_EXERCISE:
-            return buildState(state, action.time, state.exercise.tasks);
+            return buildState(state, action.time, state.taskFinishTimes);
         case COMPLETE_TASK:
-            const tasks = state.exercise.tasks;
-            const newTasks = [
-                ...tasks.slice(0, action.index),
-                Object.assign({}, tasks[action.index], {endTime: action.time}),
-                ...tasks.slice(action.index + 1)
-            ];
-            return buildState(state, state.exercise.startTime, newTasks);
+            const taskFinishTimes = state.taskFinishTimes.concat([action.time]);
+            return buildState(state, state.exerciseStartTime, taskFinishTimes);
         default:
             return state;
     }
