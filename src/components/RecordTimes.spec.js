@@ -42,3 +42,12 @@ describe('Record start time', () => {
     });
 
 });
+
+describe('Record task time', () => {
+
+    it('should begin with an empty list', () => {
+        const wrapper = shallow(<ExercisePage/>);
+        expect(wrapper.state('taskFinishTimes')).to.be.an('array').that.is.empty;
+    });
+
+});

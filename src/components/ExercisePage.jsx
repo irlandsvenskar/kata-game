@@ -7,7 +7,11 @@ export default class ExercisePage extends React.Component {
         this.exercise = props.exercise || new Exercise(null, []);
         this.timeProvider = props.timeProvider || Date.now
         this.heading = props.heading;
-        this.state = {currentTask: null, exerciseStartTime: null};
+        this.state = {
+            currentTask: null,
+            exerciseStartTime: null,
+            taskFinishTimes: []
+        };
     }
     startExercise = () => {
         this.setState({currentTask: 0, exerciseStartTime: this.timeProvider()});
