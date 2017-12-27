@@ -1,5 +1,6 @@
 import Exercise from '../model/Exercise';
 import React from 'react';
+import { calculateTotalTime } from '../model/Exercise';
 
 export default class ExercisePage extends React.Component {
     constructor(props) {
@@ -35,7 +36,16 @@ export default class ExercisePage extends React.Component {
                 <button className='done' onClick={this.taskDone}>Done!</button>
             );
         } else {
-            return <h2>Done!</h2>
+            const totalTime = calculateTotalTime(
+                this.state.exerciseStartTime,
+                this.state.taskFinishTimes);
+            return (
+                <div>
+                    <h2>Done!</h2>
+                    <h3>Total time</h3>
+                    <span className='totalTime'>{totalTime}</span>
+                </div>
+            );
         }
     }
 }
