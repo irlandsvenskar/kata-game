@@ -2,6 +2,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import Exercise from '../model/Exercise';
 import ExercisePage from './ExercisePage';
 import React from 'react';
+import Task from '../model/Task';
 import { configure, shallow } from 'enzyme';
 import { expect } from 'chai';
 
@@ -22,8 +23,11 @@ describe('Update current task', () => {
     });
 
     it('should go from 0 to 1 on done button click', () => {
-        const exercise = new Exercise(['::irrelevant task::']);
-        const wrapper = shallow(<ExercisePage exercise={exercise}/>);
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant title::', '::irrelevant instructions::')
+            ])
+        }/>);
         wrapper.setState({'currentTask': 0});
         const doneButton = wrapper.find('button.done');
         doneButton.simulate('click');
@@ -31,8 +35,12 @@ describe('Update current task', () => {
     });
 
     it('should go from 1 to 2 on done button click', () => {
-        const exercise = new Exercise(['::irrelevant task 1::', '::irrelevant task 2::']);
-        const wrapper = shallow(<ExercisePage exercise={exercise}/>);
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant title::', '::irrelevant instructions::'),
+                new Task('::irrelevant title::', '::irrelevant instructions::')
+            ])
+        }/>);
         wrapper.setState({'currentTask': 1});
         const doneButton = wrapper.find('button.done');
         doneButton.simulate('click');
@@ -49,7 +57,12 @@ describe('Exercise page states', () => {
     });
 
     it('should not show done button after last task', () => {
-        const wrapper = shallow(<ExercisePage exercise={new Exercise(['::task 0::', '::task 1::'])}/>);
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant title::', '::irrelevant instructions::'),
+                new Task('::irrelevant title::', '::irrelevant instructions::')
+            ])
+        }/>);
         wrapper.setState({currentTask: 2});
         expect(wrapper.find('button.done')).to.have.length(0);
     });
@@ -66,13 +79,21 @@ describe('Exercise page states', () => {
     });
 
     it('should show exercise title during the exercise', () => {
-        const wrapper = shallow(<ExercisePage exercise={new Exercise(['::task::'])}/>);
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant::', '::irrelevant::')
+            ])
+        }/>);
         wrapper.setState({currentTask: 0});
         expect(wrapper.find('h2').text()).to.equal('::exercise title::');
     });
 
     it('should show exercise title after the exercise', () => {
-        const wrapper = shallow(<ExercisePage exercise={new Exercise(['::task::'])}/>);
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant::', '::irrelevant::')
+            ])
+        }/>);
         wrapper.setState({currentTask: 1});
         expect(wrapper.find('h2').text()).to.equal('::exercise title::');
     });
@@ -83,9 +104,23 @@ describe('Exercise page states', () => {
     });
 
     it('should show task title during the task', () => {
-        const wrapper = shallow(<ExercisePage exercise={new Exercise(['::task title::'])}/>);
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::task title::', '::irrelevant instructions::')
+            ])
+        }/>);
         wrapper.setState({currentTask: 0});
         expect(wrapper.find('h3').text()).to.equal('::task title::');
+    });
+
+    it('should show task instructions during the task', () => {
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant title::', '::task instructions::')
+            ])
+        }/>);
+        wrapper.setState({currentTask: 0});
+        expect(wrapper.find('p').text()).to.equal('::task instructions::');
     });
 
 });

@@ -32,11 +32,12 @@ export default class ExercisePage extends React.Component {
                 </div>
             );
         } else if (this.state.currentTask < this.exercise.tasks.length) {
-            const taskTitle = this.exercise.tasks[this.state.currentTask];
+            const task = this.exercise.tasks[this.state.currentTask];
             return (
                 <div>
                     <h2>{this.exercise.title}</h2>
-                    <h3>{taskTitle}</h3>
+                    <h3>{task.title}</h3>
+                    <p>{task.instructions}</p>
                     <button className='done' onClick={this.taskDone}>Done!</button>
                 </div>
             );

@@ -2,6 +2,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import Exercise from '../model/Exercise';
 import ExercisePage from './ExercisePage';
 import React from 'react';
+import Task from '../model/Task';
 import { configure, shallow } from 'enzyme';
 import { expect } from 'chai';
 
@@ -54,11 +55,12 @@ describe('Record task time', () => {
     it('should record the task finish time', () => {
         const IRRELEVANT_NUMERIC_VALUE = 123;
         const timeProvider = () => IRRELEVANT_NUMERIC_VALUE;
-        const wrapper = shallow(
-            <ExercisePage
-                exercise={new Exercise(['::some task::'])}
-                timeProvider={timeProvider}/>
-        );
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant title::', '::irrelevant instructions::')
+            ])
+        }
+            timeProvider={timeProvider}/>);
         wrapper.setState({currentTask: 0});
         wrapper.find('button.done').simulate('click');
         const finishTimes = wrapper.state('taskFinishTimes');
@@ -66,9 +68,11 @@ describe('Record task time', () => {
     });
 
     it('should record the task finish time when no timeProvider is given', () => {
-        const wrapper = shallow(
-            <ExercisePage exercise={new Exercise(['::some task::'])}/>
-        );
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant title::', '::irrelevant instructions::')
+            ])
+        }/>);
         wrapper.setState({currentTask: 0});
         wrapper.find('button.done').simulate('click');
         const finishTimes = wrapper.state('taskFinishTimes');
@@ -80,11 +84,12 @@ describe('Record task time', () => {
         const IRRELEVANT_NUMERIC_VALUE_1 = 123;
         const IRRELEVANT_NUMERIC_VALUE_2 = 456;
         const timeProvider = () => IRRELEVANT_NUMERIC_VALUE_2;
-        const wrapper = shallow(
-            <ExercisePage
-                exercise={new Exercise(['::some task::', '::some other task::'])}
-                timeProvider={timeProvider}/>
-        );
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant title::', '::irrelevant instructions::'),
+                new Task('::irrelevant title::', '::irrelevant instructions::')
+            ])}
+            timeProvider={timeProvider}/>);
         wrapper.setState({
             currentTask: 0,
             taskFinishTimes: [IRRELEVANT_NUMERIC_VALUE_1]

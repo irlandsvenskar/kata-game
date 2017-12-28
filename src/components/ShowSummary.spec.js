@@ -2,6 +2,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import Exercise from '../model/Exercise';
 import ExercisePage from './ExercisePage';
 import React from 'react';
+import Task from '../model/Task';
 import { configure, shallow } from 'enzyme';
 import { expect } from 'chai';
 
@@ -10,8 +11,12 @@ configure({adapter: new Adapter()});
 describe('Show total time', () => {
 
     it('should show total time', () => {
-        const wrapper = shallow(<ExercisePage
-            exercise={new Exercise(['::task 1::', '::task 2::'])}/>);
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant title::', '::irrelevant instructions::'),
+                new Task('::irrelevant title::', '::irrelevant instructions::')
+            ])
+        }/>);
         wrapper.setState({
             currentTask: 2,
             exerciseStartTime: 10,
@@ -22,8 +27,11 @@ describe('Show total time', () => {
     });
 
     it('should show another total time', () => {
-        const wrapper = shallow(<ExercisePage
-            exercise={new Exercise(['::task 1::'])}/>);
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant title::', '::irrelevant instructions::')
+            ])
+        }/>);
         wrapper.setState({
             currentTask: 1,
             exerciseStartTime: 8,
@@ -38,8 +46,11 @@ describe('Show total time', () => {
 describe('Show task times', () => {
 
     it('should show task time for single task', () => {
-        const wrapper = shallow(<ExercisePage
-            exercise={new Exercise(['::task 1::'])}/>);
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant title::', '::irrelevant instructions::')
+            ])
+        }/>);
         wrapper.setState({
             currentTask: 1,
             exerciseStartTime: 10,
@@ -50,8 +61,12 @@ describe('Show task times', () => {
     });
 
     it('should show task times for multiple tasks', () => {
-        const wrapper = shallow(<ExercisePage
-            exercise={new Exercise(['::task 1::', '::task 2::'])}/>);
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise([
+                new Task('::irrelevant title::', '::irrelevant instructions::'),
+                new Task('::irrelevant title::', '::irrelevant instructions::')
+            ])
+        }/>);
         wrapper.setState({
             currentTask: 2,
             exerciseStartTime: 7,

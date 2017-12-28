@@ -1,11 +1,9 @@
 export default class Exercise {
-
     constructor(tasks) {
         this.tasks = tasks;
         this.title = '::exercise title::';
         this.instructions = '::exercise instructions::';
     }
-
 }
 
 const calculateTaskTime = (exerciseStartTime, taskFinishTimes, taskIndex) => {
