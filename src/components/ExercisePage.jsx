@@ -7,7 +7,6 @@ export default class ExercisePage extends React.Component {
         super(props);
         this.exercise = props.exercise || new Exercise([]);
         this.timeProvider = props.timeProvider || Date.now
-        this.heading = props.heading;
         this.state = {
             currentTask: null,
             exerciseStartTime: null,
@@ -27,7 +26,7 @@ export default class ExercisePage extends React.Component {
         if (this.state.currentTask === null) {
             return (
                 <div>
-                    <h2>{this.heading}</h2>
+                    <h2>{this.exercise.title}</h2>
                     <button className='start' onClick={this.startExercise}>Start!</button>
                 </div>
             );

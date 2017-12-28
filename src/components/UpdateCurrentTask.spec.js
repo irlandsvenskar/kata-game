@@ -60,9 +60,9 @@ describe('Exercise page states', () => {
         expect(wrapper.find('button.start')).to.have.length(0);
     });
 
-    it('should show heading before start', () => {
-        const wrapper = shallow(<ExercisePage heading='::some heading::'/>);
-        expect(wrapper.find('h2').text()).to.equal('::some heading::');
+    it('should show exercise title before start', () => {
+        const wrapper = shallow(<ExercisePage/>);
+        expect(wrapper.find('h2').text()).to.equal('::exercise title::');
     });
 
 });

@@ -2,6 +2,7 @@ export default class Exercise {
 
     constructor(tasks) {
         this.tasks = tasks;
+        this.title = '::exercise title::';
     }
 
 }
