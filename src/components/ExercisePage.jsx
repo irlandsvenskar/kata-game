@@ -52,7 +52,7 @@ export default class ExercisePage extends React.Component {
             const totalTime = calculateTotalTime(startTime, finishTimes);
             return (
                 <div>
-                    <h2>Done!</h2>
+                    <h2>{this.exercise.title}</h2>
                     <h3>Task times</h3>
                     <ol>{taskTimes}</ol>
                     <h3>Total time</h3>
