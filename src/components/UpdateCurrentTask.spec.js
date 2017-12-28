@@ -3,6 +3,7 @@ import Exercise from '../model/Exercise';
 import ExercisePage from './ExercisePage';
 import React from 'react';
 import Task from '../model/Task';
+import { buildTestExerciseWithTasks } from '../model/Exercise';
 import { configure, shallow } from 'enzyme';
 import { expect } from 'chai';
 
@@ -24,9 +25,7 @@ describe('Update current task', () => {
 
     it('should go from 0 to 1 on done button click', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant title::', '::irrelevant instructions::')
-            ])
+            buildTestExerciseWithTasks(1)
         }/>);
         wrapper.setState({'currentTask': 0});
         const doneButton = wrapper.find('button.done');
@@ -36,10 +35,7 @@ describe('Update current task', () => {
 
     it('should go from 1 to 2 on done button click', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant title::', '::irrelevant instructions::'),
-                new Task('::irrelevant title::', '::irrelevant instructions::')
-            ])
+            buildTestExerciseWithTasks(2)
         }/>);
         wrapper.setState({'currentTask': 1});
         const doneButton = wrapper.find('button.done');
@@ -58,10 +54,7 @@ describe('Exercise page states', () => {
 
     it('should not show done button after last task', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant title::', '::irrelevant instructions::'),
-                new Task('::irrelevant title::', '::irrelevant instructions::')
-            ])
+            buildTestExerciseWithTasks(2)
         }/>);
         wrapper.setState({currentTask: 2});
         expect(wrapper.find('button.done')).to.have.length(0);
@@ -80,9 +73,7 @@ describe('Exercise page states', () => {
 
     it('should show exercise title during the exercise', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant::', '::irrelevant::')
-            ])
+            buildTestExerciseWithTasks(1)
         }/>);
         wrapper.setState({currentTask: 0});
         expect(wrapper.find('h2').text()).to.equal('::exercise title::');
@@ -90,9 +81,7 @@ describe('Exercise page states', () => {
 
     it('should show exercise title after the exercise', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant::', '::irrelevant::')
-            ])
+            buildTestExerciseWithTasks(1)
         }/>);
         wrapper.setState({currentTask: 1});
         expect(wrapper.find('h2').text()).to.equal('::exercise title::');

@@ -3,6 +3,7 @@ import Exercise from '../model/Exercise';
 import ExercisePage from './ExercisePage';
 import React from 'react';
 import Task from '../model/Task';
+import { buildTestExerciseWithTasks } from '../model/Exercise';
 import { configure, shallow } from 'enzyme';
 import { expect } from 'chai';
 
@@ -55,11 +56,8 @@ describe('Record task time', () => {
     it('should record the task finish time', () => {
         const IRRELEVANT_NUMERIC_VALUE = 123;
         const timeProvider = () => IRRELEVANT_NUMERIC_VALUE;
-        const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant title::', '::irrelevant instructions::')
-            ])
-        }
+        const wrapper = shallow(<ExercisePage
+            exercise={buildTestExerciseWithTasks(1)}
             timeProvider={timeProvider}/>);
         wrapper.setState({currentTask: 0});
         wrapper.find('button.done').simulate('click');
@@ -69,9 +67,7 @@ describe('Record task time', () => {
 
     it('should record the task finish time when no timeProvider is given', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant title::', '::irrelevant instructions::')
-            ])
+            buildTestExerciseWithTasks(1)
         }/>);
         wrapper.setState({currentTask: 0});
         wrapper.find('button.done').simulate('click');
@@ -84,11 +80,8 @@ describe('Record task time', () => {
         const IRRELEVANT_NUMERIC_VALUE_1 = 123;
         const IRRELEVANT_NUMERIC_VALUE_2 = 456;
         const timeProvider = () => IRRELEVANT_NUMERIC_VALUE_2;
-        const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant title::', '::irrelevant instructions::'),
-                new Task('::irrelevant title::', '::irrelevant instructions::')
-            ])}
+        const wrapper = shallow(<ExercisePage
+            exercise={buildTestExerciseWithTasks(2)}
             timeProvider={timeProvider}/>);
         wrapper.setState({
             currentTask: 0,

@@ -3,6 +3,7 @@ import Exercise from '../model/Exercise';
 import ExercisePage from './ExercisePage';
 import React from 'react';
 import Task from '../model/Task';
+import { buildTestExerciseWithTasks } from '../model/Exercise';
 import { configure, shallow } from 'enzyme';
 import { expect } from 'chai';
 
@@ -12,10 +13,7 @@ describe('Show total time', () => {
 
     it('should show total time', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant title::', '::irrelevant instructions::'),
-                new Task('::irrelevant title::', '::irrelevant instructions::')
-            ])
+            buildTestExerciseWithTasks(2)
         }/>);
         wrapper.setState({
             currentTask: 2,
@@ -28,9 +26,7 @@ describe('Show total time', () => {
 
     it('should show another total time', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant title::', '::irrelevant instructions::')
-            ])
+            buildTestExerciseWithTasks(1)
         }/>);
         wrapper.setState({
             currentTask: 1,
@@ -47,9 +43,7 @@ describe('Show task times', () => {
 
     it('should show task time for single task', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant title::', '::irrelevant instructions::')
-            ])
+            buildTestExerciseWithTasks(1)
         }/>);
         wrapper.setState({
             currentTask: 1,
@@ -62,10 +56,7 @@ describe('Show task times', () => {
 
     it('should show task times for multiple tasks', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant title::', '::irrelevant instructions::'),
-                new Task('::irrelevant title::', '::irrelevant instructions::')
-            ])
+            buildTestExerciseWithTasks(2)
         }/>);
         wrapper.setState({
             currentTask: 2,

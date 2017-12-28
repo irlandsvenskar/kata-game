@@ -1,9 +1,19 @@
+import Task from './Task.js';
+
 export default class Exercise {
     constructor(tasks) {
         this.tasks = tasks;
         this.title = '::exercise title::';
         this.instructions = '::exercise instructions::';
     }
+}
+
+const buildTestExerciseWithTasks = (taskCount) => {
+    var tasks = [];
+    for (var i = 0; i < taskCount; i++) {
+        tasks.push(new Task('::irrelevant title::', '::irrelevant instructions::'));
+    }
+    return new Exercise(tasks);
 }
 
 const calculateTaskTime = (exerciseStartTime, taskFinishTimes, taskIndex) => {
@@ -20,4 +30,4 @@ const calculateTotalTime = (exerciseStartTime, taskFinishTimes) => {
     return taskFinishTimes[taskFinishTimes.length - 1] - exerciseStartTime;
 };
 
-export { calculateTaskTime, calculateTotalTime };
+export { buildTestExerciseWithTasks, calculateTaskTime, calculateTotalTime };
