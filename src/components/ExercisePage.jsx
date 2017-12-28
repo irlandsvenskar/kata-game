@@ -27,6 +27,7 @@ export default class ExercisePage extends React.Component {
             return (
                 <div>
                     <h2>{this.exercise.title}</h2>
+                    <p>{this.exercise.instructions}</p>
                     <button className='start' onClick={this.startExercise}>Start!</button>
                 </div>
             );
