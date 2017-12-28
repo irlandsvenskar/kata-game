@@ -33,7 +33,10 @@ export default class ExercisePage extends React.Component {
             );
         } else if (this.state.currentTask < this.exercise.tasks.length) {
             return (
-                <button className='done' onClick={this.taskDone}>Done!</button>
+                <div>
+                    <h2>{this.exercise.title}</h2>
+                    <button className='done' onClick={this.taskDone}>Done!</button>
+                </div>
             );
         } else {
             const startTime = this.state.exerciseStartTime;
