@@ -82,4 +82,10 @@ describe('Exercise page states', () => {
         expect(wrapper.find('p').text()).to.equal('::exercise instructions::');
     });
 
+    it('should show task title during the task', () => {
+        const wrapper = shallow(<ExercisePage exercise={new Exercise(['::task title::'])}/>);
+        wrapper.setState({currentTask: 0});
+        expect(wrapper.find('h3').text()).to.equal('::task title::');
+    });
+
 });
