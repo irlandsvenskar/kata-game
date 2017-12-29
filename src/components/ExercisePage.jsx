@@ -1,4 +1,5 @@
 import Exercise from '../model/Exercise';
+import ExerciseStartPage from './ExerciseStartPage';
 import React from 'react';
 import { calculateTaskTime, calculateTotalTime } from '../model/Exercise';
 
@@ -23,46 +24,50 @@ export default class ExercisePage extends React.Component {
             taskFinishTimes: prevState.taskFinishTimes.concat([this.timeProvider()])
         }));
     }
+    showCurrentTaskPage = () => {
+        const currentTask = this.exercise.tasks[this.state.currentTask];
+        return (
+            <div>
+                <h2>{this.exercise.title}</h2>
+                <h3>{currentTask.title}</h3>
+                <p>{currentTask.instructions}</p>
+                <button className='done' onClick={this.taskDone}>Done!</button>
+            </div>
+        );
+    }
+    showExerciseSummaryPage = () => {
+        const startTime = this.state.exerciseStartTime;
+        const finishTimes = this.state.taskFinishTimes;
+        const taskTimes = finishTimes.map((t, index) => {
+            const duration = calculateTaskTime(startTime, finishTimes, index);
+            return (
+                <li key={index}>
+                    <span className='taskTime'>{duration}</span>
+                </li>
+            );
+        });
+        const totalTime = calculateTotalTime(startTime, finishTimes);
+        return (
+            <div>
+                <h2>{this.exercise.title}</h2>
+                <h3>Task times</h3>
+                <ol>{taskTimes}</ol>
+                <h3>Total time</h3>
+                <span className='totalTime'>{totalTime}</span>
+            </div>
+        );
+    }
     render() {
         if (this.state.currentTask === null) {
-            return (
-                <div>
-                    <h2>{this.exercise.title}</h2>
-                    <p>{this.exercise.instructions}</p>
-                    <button className='start' onClick={this.startExercise}>Start!</button>
-                </div>
-            );
+            return <ExerciseStartPage
+                title={this.exercise.title}
+                instructions={this.exercise.instructions}
+                startExercise={this.startExercise}
+                />
         } else if (this.state.currentTask < this.exercise.tasks.length) {
-            const task = this.exercise.tasks[this.state.currentTask];
-            return (
-                <div>
-                    <h2>{this.exercise.title}</h2>
-                    <h3>{task.title}</h3>
-                    <p>{task.instructions}</p>
-                    <button className='done' onClick={this.taskDone}>Done!</button>
-                </div>
-            );
+            return this.showCurrentTaskPage();
         } else {
-            const startTime = this.state.exerciseStartTime;
-            const finishTimes = this.state.taskFinishTimes;
-            const taskTimes = finishTimes.map((t, index) => {
-                const duration = calculateTaskTime(startTime, finishTimes, index);
-                return (
-                    <li key={index}>
-                        <span className='taskTime'>{duration}</span>
-                    </li>
-                );
-            });
-            const totalTime = calculateTotalTime(startTime, finishTimes);
-            return (
-                <div>
-                    <h2>{this.exercise.title}</h2>
-                    <h3>Task times</h3>
-                    <ol>{taskTimes}</ol>
-                    <h3>Total time</h3>
-                    <span className='totalTime'>{totalTime}</span>
-                </div>
-            );
+            return this.showExerciseSummaryPage();
         }
     }
 }

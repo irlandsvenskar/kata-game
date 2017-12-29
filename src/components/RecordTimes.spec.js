@@ -21,7 +21,7 @@ describe('Record start time', () => {
         const timeProvider = () => 2; // Irrelevant value
         const wrapper = shallow(<ExercisePage timeProvider={timeProvider}/>);
 
-        wrapper.find('button.start').simulate('click');
+        wrapper.instance().startExercise();
 
         const startTime = wrapper.state('exerciseStartTime');
         expect(startTime).to.equal(2);
@@ -31,7 +31,7 @@ describe('Record start time', () => {
         const timeProvider = () => 5; // Irrelevant value
         const wrapper = shallow(<ExercisePage timeProvider={timeProvider}/>);
 
-        wrapper.find('button.start').simulate('click');
+        wrapper.instance().startExercise();
 
         const startTime = wrapper.state('exerciseStartTime');
         expect(startTime).to.equal(5);
@@ -40,7 +40,7 @@ describe('Record start time', () => {
     it('should record a start time when no timeProvider is given', () => {
         const wrapper = shallow(<ExercisePage/>);
 
-        wrapper.find('button.start').simulate('click');
+        wrapper.instance().startExercise();
 
         const startTime = wrapper.state('exerciseStartTime');
         expect(startTime).to.be.a('number');
