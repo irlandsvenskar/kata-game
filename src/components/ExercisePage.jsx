@@ -5,7 +5,8 @@ import { calculateTaskTime, calculateTotalTime } from '../model/Exercise';
 export default class ExercisePage extends React.Component {
     constructor(props) {
         super(props);
-        this.exercise = props.exercise || new Exercise([]);
+        // REFACTOR: Make exercise a required property
+        this.exercise = props.exercise || new Exercise('::title::', '::instructions::', []);
         this.timeProvider = props.timeProvider || Date.now
         this.state = {
             currentTask: null,

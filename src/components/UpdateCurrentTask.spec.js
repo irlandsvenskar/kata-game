@@ -67,16 +67,18 @@ describe('Exercise page states', () => {
     });
 
     it('should show exercise title before the exercise', () => {
-        const wrapper = shallow(<ExercisePage/>);
-        expect(wrapper.find('h2').text()).to.equal('::exercise title::');
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise('::title::', '::irrelevant instructions::', [])
+        }/>);
+        expect(wrapper.find('h2').text()).to.equal('::title::');
     });
 
     it('should show exercise title during the exercise', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            buildTestExerciseWithTasks(1)
+            new Exercise('::title::', '::irrelevant instructions::', [])
         }/>);
         wrapper.setState({currentTask: 0});
-        expect(wrapper.find('h2').text()).to.equal('::exercise title::');
+        expect(wrapper.find('h2').text()).to.equal('::title::');
     });
 
     it('should show exercise title after the exercise', () => {
@@ -84,19 +86,22 @@ describe('Exercise page states', () => {
             buildTestExerciseWithTasks(1)
         }/>);
         wrapper.setState({currentTask: 1});
-        expect(wrapper.find('h2').text()).to.equal('::exercise title::');
+        expect(wrapper.find('h2').text()).to.equal('::irrelevant exercise title::');
     });
 
     it('should show exercise instructions before start', () => {
-        const wrapper = shallow(<ExercisePage/>);
-        expect(wrapper.find('p').text()).to.equal('::exercise instructions::');
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise('::irrelevant title::', '::instructions::', [])
+        }/>);
+        expect(wrapper.find('p').text()).to.equal('::instructions::');
     });
 
     it('should show task title during the task', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::task title::', '::irrelevant instructions::')
-            ])
+            new Exercise(
+                '::irrelevant exercise title',
+                '::irrelevant exercise instructions',
+                [new Task('::task title::', '::irrelevant instructions::')])
         }/>);
         wrapper.setState({currentTask: 0});
         expect(wrapper.find('h3').text()).to.equal('::task title::');
@@ -104,9 +109,10 @@ describe('Exercise page states', () => {
 
     it('should show task instructions during the task', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            new Exercise([
-                new Task('::irrelevant title::', '::task instructions::')
-            ])
+            new Exercise(
+                '::irrelevant exercise title',
+                '::irrelevant exercise instructions',
+                [new Task('::irrelevant title::', '::task instructions::')])
         }/>);
         wrapper.setState({currentTask: 0});
         expect(wrapper.find('p').text()).to.equal('::task instructions::');

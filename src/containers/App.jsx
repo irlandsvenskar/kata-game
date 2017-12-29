@@ -4,7 +4,7 @@ import ExercisePage from '../components/ExercisePage';
 import Task from '../model/Task';
 
 // REFACTOR: Use non-hardcoded supplier for exercises
-const exercise = new Exercise([
+const exercise = new Exercise('::exercise title::', '::exercise instructions::', [
     new Task('::task title 1::', '::task instructions 1::'),
     new Task('::task title 2::', '::task instructions 2::')
 ]);

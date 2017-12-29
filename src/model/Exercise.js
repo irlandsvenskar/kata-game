@@ -1,10 +1,10 @@
 import Task from './Task.js';
 
 export default class Exercise {
-    constructor(tasks) {
+    constructor(title, instructions, tasks) {
         this.tasks = tasks;
-        this.title = '::exercise title::';
-        this.instructions = '::exercise instructions::';
+        this.title = title;
+        this.instructions = instructions;
     }
 }
 
@@ -13,7 +13,10 @@ const buildTestExerciseWithTasks = (taskCount) => {
     for (var i = 0; i < taskCount; i++) {
         tasks.push(new Task('::irrelevant title::', '::irrelevant instructions::'));
     }
-    return new Exercise(tasks);
+    return new Exercise(
+        '::irrelevant exercise title::',
+        '::irrelevant exercise instructions::',
+        tasks);
 }
 
 const calculateTaskTime = (exerciseStartTime, taskFinishTimes, taskIndex) => {
