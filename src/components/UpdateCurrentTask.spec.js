@@ -95,12 +95,15 @@ describe('Exercise page states', () => {
 
     it('should show exercise title after the exercise', () => {
         const wrapper = shallow(<ExercisePage exercise={
-            buildTestExerciseWithTasks(1)
+            new Exercise(
+                '::exercise title::',
+                '::irrelevant exercise instructions::',
+                [new Task('::irrelevant title::', '::irrelevant task instructions::')])
         }/>);
 
         wrapper.setState({currentTask: 1});
 
-        expect(wrapper.find('h2').text()).to.equal('::irrelevant exercise title::');
+        expect(wrapper.find('h2').text()).to.equal('::exercise title::');
     });
 
     it('should show exercise instructions before start', () => {
@@ -114,8 +117,8 @@ describe('Exercise page states', () => {
     it('should show task title during the task', () => {
         const wrapper = shallow(<ExercisePage exercise={
             new Exercise(
-                '::irrelevant exercise title',
-                '::irrelevant exercise instructions',
+                '::irrelevant exercise title::',
+                '::irrelevant exercise instructions::',
                 [new Task('::task title::', '::irrelevant instructions::')])
         }/>);
 
@@ -127,8 +130,8 @@ describe('Exercise page states', () => {
     it('should show task instructions during the task', () => {
         const wrapper = shallow(<ExercisePage exercise={
             new Exercise(
-                '::irrelevant exercise title',
-                '::irrelevant exercise instructions',
+                '::irrelevant exercise title::',
+                '::irrelevant exercise instructions::',
                 [new Task('::irrelevant title::', '::task instructions::')])
         }/>);
 
