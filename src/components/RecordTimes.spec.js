@@ -13,33 +13,35 @@ describe('Record start time', () => {
 
     it('should begin with a null start time', () => {
         const wrapper = shallow(<ExercisePage/>);
+
         expect(wrapper.state('exerciseStartTime')).to.equal(null);
     });
 
     it('should record the start time', () => {
-        const IRRELEVANT_NUMERIC_VALUE = 2;
-        const timeProvider = () => IRRELEVANT_NUMERIC_VALUE;
+        const timeProvider = () => 2; // Irrelevant value
         const wrapper = shallow(<ExercisePage timeProvider={timeProvider}/>);
-        const startButton = wrapper.find('button.start');
-        startButton.simulate('click');
+
+        wrapper.find('button.start').simulate('click');
+
         const startTime = wrapper.state('exerciseStartTime');
-        expect(startTime).to.equal(IRRELEVANT_NUMERIC_VALUE);
+        expect(startTime).to.equal(2);
     });
 
     it('should record another start time', () => {
-        const IRRELEVANT_NUMERIC_VALUE = 5;
-        const timeProvider = () => IRRELEVANT_NUMERIC_VALUE;
+        const timeProvider = () => 5; // Irrelevant value
         const wrapper = shallow(<ExercisePage timeProvider={timeProvider}/>);
-        const startButton = wrapper.find('button.start');
-        startButton.simulate('click');
+
+        wrapper.find('button.start').simulate('click');
+
         const startTime = wrapper.state('exerciseStartTime');
-        expect(startTime).to.equal(IRRELEVANT_NUMERIC_VALUE);
+        expect(startTime).to.equal(5);
     });
 
     it('should record a start time when no timeProvider is given', () => {
         const wrapper = shallow(<ExercisePage/>);
-        const startButton = wrapper.find('button.start');
-        startButton.simulate('click');
+
+        wrapper.find('button.start').simulate('click');
+
         const startTime = wrapper.state('exerciseStartTime');
         expect(startTime).to.be.a('number');
     });
@@ -50,19 +52,21 @@ describe('Record task time', () => {
 
     it('should begin with an empty list', () => {
         const wrapper = shallow(<ExercisePage/>);
+
         expect(wrapper.state('taskFinishTimes')).to.be.an('array').that.is.empty;
     });
 
     it('should record the task finish time', () => {
-        const IRRELEVANT_NUMERIC_VALUE = 123;
-        const timeProvider = () => IRRELEVANT_NUMERIC_VALUE;
+        const timeProvider = () => 123; // Irrelevant value
         const wrapper = shallow(<ExercisePage
             exercise={buildTestExerciseWithTasks(1)}
             timeProvider={timeProvider}/>);
         wrapper.setState({currentTask: 0});
+
         wrapper.find('button.done').simulate('click');
+
         const finishTimes = wrapper.state('taskFinishTimes');
-        expect(finishTimes).to.deep.equal([IRRELEVANT_NUMERIC_VALUE]);
+        expect(finishTimes).to.deep.equal([123]);
     });
 
     it('should record the task finish time when no timeProvider is given', () => {
@@ -70,27 +74,28 @@ describe('Record task time', () => {
             buildTestExerciseWithTasks(1)
         }/>);
         wrapper.setState({currentTask: 0});
+
         wrapper.find('button.done').simulate('click');
+
         const finishTimes = wrapper.state('taskFinishTimes');
         expect(finishTimes).to.be.an('array').of.length(1);
         expect(finishTimes[0]).to.be.a('number');
     });
 
     it('should record a second task finish time', () => {
-        const IRRELEVANT_NUMERIC_VALUE_1 = 123;
-        const IRRELEVANT_NUMERIC_VALUE_2 = 456;
-        const timeProvider = () => IRRELEVANT_NUMERIC_VALUE_2;
+        const timeProvider = () => 456; // Irrelevant value
         const wrapper = shallow(<ExercisePage
             exercise={buildTestExerciseWithTasks(2)}
             timeProvider={timeProvider}/>);
         wrapper.setState({
             currentTask: 0,
-            taskFinishTimes: [IRRELEVANT_NUMERIC_VALUE_1]
+            taskFinishTimes: [123] // Irrelevant value
         });
+
         wrapper.find('button.done').simulate('click');
+
         const finishTimes = wrapper.state('taskFinishTimes');
-        expect(finishTimes).to.deep.equal(
-            [IRRELEVANT_NUMERIC_VALUE_1, IRRELEVANT_NUMERIC_VALUE_2]);
+        expect(finishTimes).to.deep.equal([123, 456]);
     });
 
 });
