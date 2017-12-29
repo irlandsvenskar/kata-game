@@ -2,6 +2,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import Exercise from '../model/Exercise';
 import ExercisePage from './ExercisePage';
 import ExerciseStartPage from './ExerciseStartPage';
+import ExerciseSummaryPage from './ExerciseSummaryPage';
 import React from 'react';
 import Task from '../model/Task';
 import { buildTestExerciseWithTasks } from '../model/Exercise';
@@ -94,6 +95,19 @@ describe('Exercise page states', () => {
         expect(wrapper.find(ExerciseStartPage)).to.have.length(1);
     });
 
+    it('should show ExerciseSummaryPage after the exercise', () => {
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise(
+                '::exercise title::',
+                '::irrelevant exercise instructions::',
+                [new Task('::irrelevant title::', '::irrelevant task instructions::')])
+        }/>);
+
+        wrapper.setState({currentTask: 1});
+
+        expect(wrapper.find(ExerciseSummaryPage)).to.have.length(1);
+    });
+
     it('should show exercise title during the exercise', () => {
         const wrapper = shallow(<ExercisePage exercise={
             new Exercise(
@@ -103,19 +117,6 @@ describe('Exercise page states', () => {
         }/>);
 
         wrapper.setState({currentTask: 0});
-
-        expect(wrapper.find('h2').text()).to.equal('::exercise title::');
-    });
-
-    it('should show exercise title after the exercise', () => {
-        const wrapper = shallow(<ExercisePage exercise={
-            new Exercise(
-                '::exercise title::',
-                '::irrelevant exercise instructions::',
-                [new Task('::irrelevant title::', '::irrelevant task instructions::')])
-        }/>);
-
-        wrapper.setState({currentTask: 1});
 
         expect(wrapper.find('h2').text()).to.equal('::exercise title::');
     });
@@ -130,6 +131,12 @@ describe('Exercise page states', () => {
         const wrapper = shallow(<ExerciseStartPage instructions='::instructions::'/>);
 
         expect(wrapper.find('p').text()).to.equal('::instructions::');
+    });
+
+    it('should show exercise title in ExerciseSummaryPage', () => {
+        const wrapper = shallow(<ExerciseSummaryPage title='::title::'/>);
+
+        expect(wrapper.find('h2').text()).to.equal('::title::');
     });
 
     it('should show task title during the task', () => {

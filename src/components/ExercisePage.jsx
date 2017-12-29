@@ -1,7 +1,7 @@
 import Exercise from '../model/Exercise';
 import ExerciseStartPage from './ExerciseStartPage';
+import ExerciseSummaryPage from './ExerciseSummaryPage';
 import React from 'react';
-import { calculateTaskTime, calculateTotalTime } from '../model/Exercise';
 
 export default class ExercisePage extends React.Component {
     constructor(props) {
@@ -35,28 +35,6 @@ export default class ExercisePage extends React.Component {
             </div>
         );
     }
-    showExerciseSummaryPage = () => {
-        const startTime = this.state.exerciseStartTime;
-        const finishTimes = this.state.taskFinishTimes;
-        const taskTimes = finishTimes.map((t, index) => {
-            const duration = calculateTaskTime(startTime, finishTimes, index);
-            return (
-                <li key={index}>
-                    <span className='taskTime'>{duration}</span>
-                </li>
-            );
-        });
-        const totalTime = calculateTotalTime(startTime, finishTimes);
-        return (
-            <div>
-                <h2>{this.exercise.title}</h2>
-                <h3>Task times</h3>
-                <ol>{taskTimes}</ol>
-                <h3>Total time</h3>
-                <span className='totalTime'>{totalTime}</span>
-            </div>
-        );
-    }
     render() {
         if (this.state.currentTask === null) {
             return <ExerciseStartPage
@@ -67,7 +45,11 @@ export default class ExercisePage extends React.Component {
         } else if (this.state.currentTask < this.exercise.tasks.length) {
             return this.showCurrentTaskPage();
         } else {
-            return this.showExerciseSummaryPage();
+            return <ExerciseSummaryPage
+                title={this.exercise.title}
+                exerciseStartTime={this.state.exerciseStartTime}
+                taskFinishTimes={this.state.taskFinishTimes}
+                />
         }
     }
 }
