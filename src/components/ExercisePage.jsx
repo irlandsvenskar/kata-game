@@ -25,14 +25,20 @@ export default class ExercisePage extends React.Component {
             taskFinishTimes: prevState.taskFinishTimes.concat([this.timeProvider()])
         }));
     }
+    exerciseNotStarted = () => {
+        return this.state.currentTask === null;
+    }
+    exerciseInProgress = () => {
+        return this.state.currentTask < this.exercise.tasks.length;
+    }
     render() {
-        if (this.state.currentTask === null) {
+        if (this.exerciseNotStarted()) {
             return <ExerciseStartPage
                 title={this.exercise.title}
                 instructions={this.exercise.instructions}
                 startExercise={this.startExercise}
                 />
-        } else if (this.state.currentTask < this.exercise.tasks.length) {
+        } else if (this.exerciseInProgress()) {
             const currentTask = this.exercise.tasks[this.state.currentTask];
             return <ExerciseTaskPage
                 exerciseTitle={this.exercise.title}
