@@ -1,6 +1,7 @@
 import Exercise from '../model/Exercise';
 import ExerciseStartPage from './ExerciseStartPage';
 import ExerciseSummaryPage from './ExerciseSummaryPage';
+import ExerciseTaskPage from './ExerciseTaskPage';
 import React from 'react';
 
 export default class ExercisePage extends React.Component {
@@ -24,17 +25,6 @@ export default class ExercisePage extends React.Component {
             taskFinishTimes: prevState.taskFinishTimes.concat([this.timeProvider()])
         }));
     }
-    showCurrentTaskPage = () => {
-        const currentTask = this.exercise.tasks[this.state.currentTask];
-        return (
-            <div>
-                <h2>{this.exercise.title}</h2>
-                <h3>{currentTask.title}</h3>
-                <p>{currentTask.instructions}</p>
-                <button className='done' onClick={this.taskDone}>Done!</button>
-            </div>
-        );
-    }
     render() {
         if (this.state.currentTask === null) {
             return <ExerciseStartPage
@@ -43,7 +33,13 @@ export default class ExercisePage extends React.Component {
                 startExercise={this.startExercise}
                 />
         } else if (this.state.currentTask < this.exercise.tasks.length) {
-            return this.showCurrentTaskPage();
+            const currentTask = this.exercise.tasks[this.state.currentTask];
+            return <ExerciseTaskPage
+                exerciseTitle={this.exercise.title}
+                taskTitle={currentTask.title}
+                instructions={currentTask.instructions}
+                taskDone={this.taskDone}
+                />
         } else {
             return <ExerciseSummaryPage
                 title={this.exercise.title}

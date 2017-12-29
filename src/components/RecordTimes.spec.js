@@ -63,7 +63,7 @@ describe('Record task time', () => {
             timeProvider={timeProvider}/>);
         wrapper.setState({currentTask: 0});
 
-        wrapper.find('button.done').simulate('click');
+        wrapper.instance().taskDone();
 
         const finishTimes = wrapper.state('taskFinishTimes');
         expect(finishTimes).to.deep.equal([123]);
@@ -75,7 +75,7 @@ describe('Record task time', () => {
         }/>);
         wrapper.setState({currentTask: 0});
 
-        wrapper.find('button.done').simulate('click');
+        wrapper.instance().taskDone();
 
         const finishTimes = wrapper.state('taskFinishTimes');
         expect(finishTimes).to.be.an('array').of.length(1);
@@ -92,7 +92,7 @@ describe('Record task time', () => {
             taskFinishTimes: [123] // Irrelevant value
         });
 
-        wrapper.find('button.done').simulate('click');
+        wrapper.instance().taskDone();
 
         const finishTimes = wrapper.state('taskFinishTimes');
         expect(finishTimes).to.deep.equal([123, 456]);
