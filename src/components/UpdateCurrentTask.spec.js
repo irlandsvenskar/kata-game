@@ -62,6 +62,42 @@ describe('Update current task', () => {
 
 });
 
+describe('Task transitions', () => {
+
+    it('should show the first task', () => {
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise(
+                '::irrelevant title::',
+                '::irrelevant instructions::',
+                [new Task('::task title::', '::irrelevant instructions::')])
+        }/>);
+
+        wrapper.setState({currentTask: 0});
+
+        expect(wrapper.find(ExerciseTaskPage).prop('taskTitle')).to.equal('::task title::');
+    });
+
+    it('should show the second task after the first', () => {
+        const wrapper = shallow(<ExercisePage exercise={
+            new Exercise(
+                '::irrelevant title::',
+                '::irrelevant instructions::',
+                [
+                    new Task('::task title 1::', '::irrelevant instructions::'),
+                    new Task('::task title 2::', '::irrelevant instructions::')
+                ])
+        }/>);
+
+        wrapper.setState({currentTask: 0});
+        expect(wrapper.find(ExerciseTaskPage).prop('taskTitle')).to.equal('::task title 1::');
+
+        wrapper.instance().taskDone();
+        wrapper.update();
+        expect(wrapper.find(ExerciseTaskPage).prop('taskTitle')).to.equal('::task title 2::');
+    });
+
+});
+
 describe('Exercise page states', () => {
 
     it('should not show done button before start', () => {
