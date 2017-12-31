@@ -27,6 +27,7 @@ export default class ExerciseSummaryPage extends React.Component {
 }
 
 const formatTime = (timeInMillis) => {
+    // REFACTOR: Could use standard string formatting here
     if (timeInMillis % 10 !== 0) {
         return timeInMillis / 1000 + 's'
     } else if (timeInMillis % 100 !== 0) {
