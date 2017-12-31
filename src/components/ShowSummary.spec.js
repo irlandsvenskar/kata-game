@@ -29,6 +29,20 @@ describe('Show total time', () => {
 
 });
 
+describe('Show task names', () => {
+
+    it('should show task name for single task', () => {
+        const irrelevantValue = 1;
+        const wrapper = shallow(<ExerciseSummaryPage
+            exerciseStartTime={irrelevantValue} taskFinishTimes={[irrelevantValue]}/>);
+
+        const taskName = wrapper.find('span.taskName').at(0).text();
+
+        expect(taskName).to.equal('::task name::');
+    });
+
+});
+
 describe('Show task times', () => {
 
     it('should show task time for single task', () => {

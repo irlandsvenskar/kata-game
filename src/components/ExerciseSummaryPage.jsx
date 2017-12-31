@@ -9,6 +9,7 @@ export default class ExerciseSummaryPage extends React.Component {
             const duration = calculateTaskTime(startTime, finishTimes, index);
             return (
                 <li key={index}>
+                    <span className='taskName'>::task name::</span>:&nbsp;
                     <span className='taskTime'>{formatTime(duration)}</span>
                 </li>
             );
