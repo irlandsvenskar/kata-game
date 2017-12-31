@@ -16,7 +16,7 @@ describe('Show total time', () => {
             exerciseStartTime={10} taskFinishTimes={[15, 35]}/>);
 
         const totalTime = wrapper.find('span.totalTime').text();
-        expect(totalTime).to.equal('25');
+        expect(totalTime).to.equal('0.025s');
     });
 
     it('should show another total time', () => {
@@ -24,7 +24,7 @@ describe('Show total time', () => {
             exerciseStartTime={8} taskFinishTimes={[15]}/>);
 
         const totalTime = wrapper.find('span.totalTime').text();
-        expect(totalTime).to.equal('7');
+        expect(totalTime).to.equal('0.007s');
     });
 
 });

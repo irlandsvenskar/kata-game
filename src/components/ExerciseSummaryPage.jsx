@@ -20,7 +20,7 @@ export default class ExerciseSummaryPage extends React.Component {
                 <h3>Task times</h3>
                 <ol>{taskTimes}</ol>
                 <h3>Total time</h3>
-                <span className='totalTime'>{totalTime}</span>
+                <span className='totalTime'>{formatTime(totalTime)}</span>
             </div>
         );
     }
