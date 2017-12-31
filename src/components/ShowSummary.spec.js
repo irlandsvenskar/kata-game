@@ -34,11 +34,26 @@ describe('Show task names', () => {
     it('should show task name for single task', () => {
         const irrelevantValue = 1;
         const wrapper = shallow(<ExerciseSummaryPage
-            exerciseStartTime={irrelevantValue} taskFinishTimes={[irrelevantValue]}/>);
+            exerciseStartTime={irrelevantValue}
+            taskNames={['::task name::']}
+            taskFinishTimes={[irrelevantValue]}/>);
 
         const taskName = wrapper.find('span.taskName').at(0).text();
 
         expect(taskName).to.equal('::task name::');
+    });
+
+    it('should show task name for multiple tasks', () => {
+        const irrelevantValue = 1;
+        const wrapper = shallow(<ExerciseSummaryPage
+            exerciseStartTime={irrelevantValue}
+            taskNames={['::task 1::', '::task 2::']}
+            taskFinishTimes={[irrelevantValue, irrelevantValue]}/>);
+
+        const taskNames = wrapper.find('span.taskName');
+
+        expect(taskNames.at(0).text()).to.equal('::task 1::');
+        expect(taskNames.at(1).text()).to.equal('::task 2::');
     });
 
 });
