@@ -36,7 +36,7 @@ describe('Show task times', () => {
             exerciseStartTime={10} taskFinishTimes={[15]}/>);
 
         const taskTime = wrapper.find('span.taskTime').at(0).text();
-        expect(taskTime).to.equal('5');
+        expect(taskTime).to.equal('0.005s');
     });
 
     it('should show task times for multiple tasks', () => {
@@ -44,8 +44,8 @@ describe('Show task times', () => {
             exerciseStartTime={7} taskFinishTimes={[15, 27]}/>);
 
         const taskTimes = wrapper.find('span.taskTime');
-        expect(taskTimes.at(0).text()).to.equal('8');
-        expect(taskTimes.at(1).text()).to.equal('12');
+        expect(taskTimes.at(0).text()).to.equal('0.008s');
+        expect(taskTimes.at(1).text()).to.equal('0.012s');
     });
 
 });
