@@ -55,3 +55,15 @@ export default class ExercisePage extends React.Component {
         }
     }
 }
+
+export const zipTaskTimes = (tasks, taskTimes) => {
+    var zipped = [];
+    const length = Math.min(tasks.length, taskTimes.length);
+    for (var i = 0; i < length; i++) {
+        zipped.push({
+            'taskName': tasks[i].title,
+            'taskFinishTime': taskTimes[i]
+        });
+    }
+    return zipped;
+}
