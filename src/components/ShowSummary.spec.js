@@ -13,7 +13,11 @@ describe('Show total time', () => {
 
     it('should show total time', () => {
         const wrapper = shallow(<ExerciseSummaryPage
-            exerciseStartTime={10} taskFinishTimes={[15, 35]}/>);
+            exerciseStartTime={10}
+            taskDetails={[
+                {taskName: '::irrelevant::', taskFinishTime: 15},
+                {taskName: '::irrelevant::', taskFinishTime: 35}
+            ]}/>);
 
         const totalTime = wrapper.find('span.totalTime').text();
         expect(totalTime).to.equal('0.025s');
@@ -21,7 +25,10 @@ describe('Show total time', () => {
 
     it('should show another total time', () => {
         const wrapper = shallow(<ExerciseSummaryPage
-            exerciseStartTime={8} taskFinishTimes={[15]}/>);
+            exerciseStartTime={8}
+            taskDetails={[
+                {taskName: '::irrelevant::', taskFinishTime: 15}
+            ]}/>);
 
         const totalTime = wrapper.find('span.totalTime').text();
         expect(totalTime).to.equal('0.007s');
@@ -35,8 +42,9 @@ describe('Show task names', () => {
         const irrelevantValue = 1;
         const wrapper = shallow(<ExerciseSummaryPage
             exerciseStartTime={irrelevantValue}
-            taskNames={['::task name::']}
-            taskFinishTimes={[irrelevantValue]}/>);
+            taskDetails={[
+                {taskName: '::task name::', taskFinishTime: irrelevantValue}
+            ]}/>);
 
         const taskName = wrapper.find('span.taskName').at(0).text();
 
@@ -47,8 +55,10 @@ describe('Show task names', () => {
         const irrelevantValue = 1;
         const wrapper = shallow(<ExerciseSummaryPage
             exerciseStartTime={irrelevantValue}
-            taskNames={['::task 1::', '::task 2::']}
-            taskFinishTimes={[irrelevantValue, irrelevantValue]}/>);
+            taskDetails={[
+                {taskName: '::task 1::', taskFinishTime: irrelevantValue},
+                {taskName: '::task 2::', taskFinishTime: irrelevantValue}
+            ]}/>);
 
         const taskNames = wrapper.find('span.taskName');
 
@@ -62,7 +72,10 @@ describe('Show task times', () => {
 
     it('should show task time for single task', () => {
         const wrapper = shallow(<ExerciseSummaryPage
-            exerciseStartTime={10} taskFinishTimes={[15]}/>);
+            exerciseStartTime={10}
+            taskDetails={[
+                {taskName: '::irrelevant::', taskFinishTime: 15}
+            ]}/>);
 
         const taskTime = wrapper.find('span.taskTime').at(0).text();
         expect(taskTime).to.equal('0.005s');
@@ -70,7 +83,11 @@ describe('Show task times', () => {
 
     it('should show task times for multiple tasks', () => {
         const wrapper = shallow(<ExerciseSummaryPage
-            exerciseStartTime={7} taskFinishTimes={[15, 27]}/>);
+            exerciseStartTime={7}
+            taskDetails={[
+                {taskName: '::irrelevant::', taskFinishTime: 15},
+                {taskName: '::irrelevant::', taskFinishTime: 27}
+            ]}/>);
 
         const taskTimes = wrapper.find('span.taskTime');
         expect(taskTimes.at(0).text()).to.equal('0.008s');

@@ -50,7 +50,9 @@ export default class ExercisePage extends React.Component {
             return <ExerciseSummaryPage
                 title={this.exercise.title}
                 exerciseStartTime={this.state.exerciseStartTime}
-                taskFinishTimes={this.state.taskFinishTimes}
+                taskDetails={zipTaskTimes(
+                    this.exercise.tasks, this.state.taskFinishTimes
+                )}
                 />
         }
     }
@@ -61,8 +63,8 @@ export const zipTaskTimes = (tasks, taskTimes) => {
     const length = Math.min(tasks.length, taskTimes.length);
     for (var i = 0; i < length; i++) {
         zipped.push({
-            'taskName': tasks[i].title,
-            'taskFinishTime': taskTimes[i]
+            taskName: tasks[i].title,
+            taskFinishTime: taskTimes[i]
         });
     }
     return zipped;

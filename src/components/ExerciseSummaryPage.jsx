@@ -4,8 +4,9 @@ import { calculateTaskTime, calculateTotalTime } from '../model/Exercise';
 export default class ExerciseSummaryPage extends React.Component {
     render() {
         const startTime = this.props.exerciseStartTime;
-        const finishTimes = this.props.taskFinishTimes || [];
-        const taskNames = this.props.taskNames || [];
+        const taskDetails = this.props.taskDetails || [];
+        const taskNames = taskDetails.map(t => t.taskName);
+        const finishTimes = taskDetails.map(t => t.taskFinishTime);
         const taskTimes = finishTimes.map((t, index) => {
             const duration = calculateTaskTime(startTime, finishTimes, index);
             const taskName = taskNames[index];
