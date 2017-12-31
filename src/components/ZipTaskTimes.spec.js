@@ -50,4 +50,19 @@ describe('Zip task names and times', () => {
         ]);
     });
 
+    it('should zip where tasks is longer than times', () => {
+        const irrelevantTime1 = 12;
+        const irrelevantTime2 = 34;
+        const tasks = [
+            new Task('::task name::', '::irrelevant instructions::')
+        ];
+        const taskTimes = [irrelevantTime1, irrelevantTime2];
+
+        const zipped = zipTaskTimes(tasks, taskTimes);
+
+        expect(zipped).to.deep.equal([
+            {'taskName': '::task name::', 'taskFinishTime': irrelevantTime1},
+        ]);
+    });
+
 });
