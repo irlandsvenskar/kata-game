@@ -3,10 +3,14 @@ import Task from '../model/Task';
 import { expect } from 'chai';
 
 const zipTaskTimes = (tasks, taskTimes) => {
-    if (tasks.length === 0)
-        return [];
-    else
-        return [{'taskName': tasks[0].title, 'taskFinishTime': taskTimes[0]}];
+    var zipped = [];
+    for (var i = 0; i < tasks.length; i++) {
+        zipped.push({
+            'taskName': tasks[i].title,
+            'taskFinishTime': taskTimes[i]
+        });
+    }
+    return zipped;
 }
 
 describe('Zip task names and times', () => {
@@ -26,6 +30,23 @@ describe('Zip task names and times', () => {
 
         expect(zipped).to.deep.equal([
             {'taskName': '::task name::', 'taskFinishTime': irrelevantValue}
+        ]);
+    });
+
+    it('should zip multiple tasks and times', () => {
+        const irrelevantTime1 = 12;
+        const irrelevantTime2 = 34;
+        const tasks = [
+            new Task('::task 1::', '::irrelevant instructions::'),
+            new Task('::task 2::', '::irrelevant instructions::')
+        ];
+        const taskTimes = [irrelevantTime1, irrelevantTime2];
+
+        const zipped = zipTaskTimes(tasks, taskTimes);
+
+        expect(zipped).to.deep.equal([
+            {'taskName': '::task 1::', 'taskFinishTime': irrelevantTime1},
+            {'taskName': '::task 2::', 'taskFinishTime': irrelevantTime2},
         ]);
     });
 
