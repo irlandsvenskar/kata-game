@@ -25,3 +25,17 @@ export default class ExerciseSummaryPage extends React.Component {
         );
     }
 }
+
+const formatTime = (timeInMillis) => {
+    if (timeInMillis % 10 !== 0) {
+        return timeInMillis / 1000 + 's'
+    } else if (timeInMillis % 100 !== 0) {
+        return timeInMillis / 1000 + '0s'
+    } else if (timeInMillis % 1000 !== 0) {
+        return timeInMillis / 1000 + '00s'
+    } else {
+        return timeInMillis / 1000 + '.000s'
+    }
+}
+
+export { formatTime };
