@@ -79,4 +79,18 @@ describe('Convert JSON to Task', () => {
         expect(task).to.deep.equal(expected);
     });
 
+    it('should handle missing title', () => {
+        const task = jsonToTask({instructions: '::instructions::'});
+
+        const expected = new Task(undefined, <ReactMarkdown source='::instructions::'/>);
+        expect(task).to.deep.equal(expected);
+    });
+
+    it('should handle missing instructions', () => {
+        const task = jsonToTask({title: '::title::'});
+
+        const expected = new Task('::title::', <ReactMarkdown source={undefined}/>);
+        expect(task).to.deep.equal(expected);
+    });
+
 });
