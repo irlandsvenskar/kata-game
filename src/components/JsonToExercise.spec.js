@@ -1,8 +1,14 @@
 import Exercise from '../model/Exercise';
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { expect } from 'chai';
 
 const jsonToExercise = json => {
-    return new Exercise(json.title, json.instructions, json.tasks);
+    return new Exercise(
+        json.title,
+        <ReactMarkdown source={json.instructions}/>,
+        json.tasks
+    );
 };
 
 describe('Convert JSON to Exercise', () => {
@@ -16,25 +22,45 @@ describe('Convert JSON to Exercise', () => {
 
         const exercise = jsonToExercise(json);
 
-        expect(exercise).to.deep.equal(new Exercise('::title::', '::instructions::', []));
+        const expected = new Exercise(
+            '::title::',
+            <ReactMarkdown source='::instructions::'/>,
+            []
+        );
+        expect(exercise).to.deep.equal(expected);
     });
 
     it('should handle missing title', () => {
         const exercise = jsonToExercise({instructions: '::instructions::', tasks: []});
 
-        expect(exercise).to.deep.equal(new Exercise(undefined, '::instructions::', []));
+        const expected = new Exercise(
+            undefined,
+            <ReactMarkdown source='::instructions::'/>,
+            []
+        );
+        expect(exercise).to.deep.equal(expected);
     });
 
     it('should handle missing instructions', () => {
         const exercise = jsonToExercise({title: '::title::', tasks: []});
 
-        expect(exercise).to.deep.equal(new Exercise('::title::', undefined, []));
+        const expected = new Exercise(
+            '::title::',
+            <ReactMarkdown source={undefined}/>,
+            []
+        );
+        expect(exercise).to.deep.equal(expected);
     });
 
     it('should handle missing tasks', () => {
         const exercise = jsonToExercise({title: '::title::', instructions: '::instructions::'});
 
-        expect(exercise).to.deep.equal(new Exercise('::title::', '::instructions::', undefined));
+        const expected = new Exercise(
+            '::title::',
+            <ReactMarkdown source='::instructions::'/>,
+            undefined
+        );
+        expect(exercise).to.deep.equal(expected);
     });
 
 });
