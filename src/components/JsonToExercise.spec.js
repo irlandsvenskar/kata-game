@@ -1,6 +1,7 @@
 import Exercise from '../model/Exercise';
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import Task from '../model/Task';
 import { expect } from 'chai';
 
 const jsonToExercise = json => {
@@ -9,6 +10,10 @@ const jsonToExercise = json => {
         <ReactMarkdown source={json.instructions}/>,
         json.tasks
     );
+};
+
+const jsonToTask = json => {
+    return new Task(json.title, <ReactMarkdown source={json.instructions}/>);
 };
 
 describe('Convert JSON to Exercise', () => {
@@ -61,6 +66,17 @@ describe('Convert JSON to Exercise', () => {
             undefined
         );
         expect(exercise).to.deep.equal(expected);
+    });
+
+});
+
+describe('Convert JSON to Task', () => {
+
+    it('should convert task', () => {
+        const task = jsonToTask({title: '::title::', instructions: '::instructions::'});
+
+        const expected = new Task('::title::', <ReactMarkdown source='::instructions::'/>);
+        expect(task).to.deep.equal(expected);
     });
 
 });
