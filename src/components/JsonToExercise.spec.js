@@ -81,6 +81,29 @@ describe('Convert JSON to Exercise', () => {
             );
             expect(exercise).to.deep.equal(expected);
         });
+
+        it('should handle a few', () => {
+            const json = {
+                title: '::irrelevant title::',
+                instructions: '::irrelevant instructions::',
+                tasks: [
+                    {title: '::title 1::', instructions: '::instructions 1::'},
+                    {title: '::title 2::', instructions: '::instructions 2::'},
+                    {title: '::title 3::', instructions: '::instructions 3::'}
+                ]
+            };
+
+            const exercise = jsonToExercise(json);
+
+            const expected = new Exercise(
+                '::irrelevant title::', <ReactMarkdown source={'::irrelevant instructions::'}/>, [
+                    new Task('::title 1::', <ReactMarkdown source='::instructions 1::'/>),
+                    new Task('::title 2::', <ReactMarkdown source='::instructions 2::'/>),
+                    new Task('::title 3::', <ReactMarkdown source='::instructions 3::'/>)
+                ]
+            );
+            expect(exercise).to.deep.equal(expected);
+        });
     });
 
 });
