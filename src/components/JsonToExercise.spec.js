@@ -19,4 +19,22 @@ describe('Convert JSON to Exercise', () => {
         expect(exercise).to.deep.equal(new Exercise('::title::', '::instructions::', []));
     });
 
+    it('should handle missing title', () => {
+        const exercise = jsonToExercise({instructions: '::instructions::', tasks: []});
+
+        expect(exercise).to.deep.equal(new Exercise(undefined, '::instructions::', []));
+    });
+
+    it('should handle missing instructions', () => {
+        const exercise = jsonToExercise({title: '::title::', tasks: []});
+
+        expect(exercise).to.deep.equal(new Exercise('::title::', undefined, []));
+    });
+
+    it('should handle missing tasks', () => {
+        const exercise = jsonToExercise({title: '::title::', instructions: '::instructions::'});
+
+        expect(exercise).to.deep.equal(new Exercise('::title::', '::instructions::', undefined));
+    });
+
 });
