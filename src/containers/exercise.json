@@ -1,0 +1,14 @@
+{
+    "title": "::exercise title::",
+    "instructions": "::exercise instructions::",
+    "tasks": [
+        {
+            "title": "::task title 1::",
+            "instructions": "::task instructions 1::"
+        },
+        {
+            "title": "::task title 2::",
+            "instructions": "::task instructions 2::"
+        }
+    ]
+}

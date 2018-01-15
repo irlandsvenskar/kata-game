@@ -3,18 +3,8 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import Task from '../model/Task';
 import { expect } from 'chai';
+import { jsonToExercise, jsonToTask } from '../containers/App';
 
-const jsonToTask = json => {
-    return new Task(json.title, <ReactMarkdown source={json.instructions}/>);
-};
-
-const jsonToExercise = json => {
-    return new Exercise(
-        json.title,
-        <ReactMarkdown source={json.instructions}/>,
-        json.tasks && json.tasks.map(jsonToTask)
-    );
-};
 
 describe('Convert JSON to Exercise', () => {
 

@@ -1,18 +1,27 @@
-import React from 'react';
 import Exercise from '../model/Exercise';
 import ExercisePage from '../components/ExercisePage';
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import Task from '../model/Task';
 
-// REFACTOR: Use non-hardcoded supplier for exercises
-const exercise = new Exercise('::exercise title::', '::exercise instructions::', [
-    new Task('::task title 1::', '::task instructions 1::'),
-    new Task('::task title 2::', '::task instructions 2::')
-]);
+import exerciseJson from './exercise.json';
+
+export const jsonToTask = json => {
+    return new Task(json.title, <ReactMarkdown source={json.instructions}/>);
+};
+
+export const jsonToExercise = json => {
+    return new Exercise(
+        json.title,
+        <ReactMarkdown source={json.instructions}/>,
+        json.tasks && json.tasks.map(jsonToTask)
+    );
+};
 
 export default class App extends React.Component {
     render() {
         return (
-            <ExercisePage exercise={exercise}/>
+            <ExercisePage exercise={jsonToExercise(exerciseJson)}/>
         );
     }
 }
